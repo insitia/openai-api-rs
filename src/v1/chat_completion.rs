@@ -16,12 +16,12 @@ pub enum ToolChoiceType {
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
 pub struct ResponseFormat {
-    r#type: ResponseFormatType
+    pub r#type: ResponseFormatType
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
 pub struct ResponseFormatType {
-    r#type: ResponseFormatValue
+    pub r#type: ResponseFormatValue
 }
 
 
