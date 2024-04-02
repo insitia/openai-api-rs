@@ -16,19 +16,15 @@ pub enum ToolChoiceType {
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
 pub struct ResponseFormat {
-    pub r#type: ResponseFormatType
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
-pub struct ResponseFormatType {
     pub r#type: ResponseFormatValue
 }
 
 
+#[allow(non_camel_case_types)]
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
 pub enum ResponseFormatValue {
-    Text,
-    JsonObject
+    text,
+    json_object
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -309,4 +305,17 @@ pub struct Tool {
 #[serde(rename_all = "snake_case")]
 pub enum ToolType {
     Function,
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::v1::chat_completion::*;
+
+    #[test]
+    fn serialize_response_format() {
+        let response_format = ResponseFormat { r#type: ResponseFormatValue::json_object } ;
+        let serialized = serde_json::to_string(&response_format).unwrap();
+        let expected_str = r#"{"type":"json_object"}"#;
+        assert_eq!(expected_str, serialized);
+    }
 }
