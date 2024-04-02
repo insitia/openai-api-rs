@@ -269,6 +269,7 @@ where
     S: Serializer,
 {
     match value {
+        Some(ToolChoiceType::Any) => serializer.serialize_str("any"),
         Some(ToolChoiceType::None) => serializer.serialize_str("none"),
         Some(ToolChoiceType::Auto) => serializer.serialize_str("auto"),
         Some(ToolChoiceType::ToolChoice { tool }) => {
