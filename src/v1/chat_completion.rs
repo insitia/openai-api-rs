@@ -14,6 +14,23 @@ pub enum ToolChoiceType {
     ToolChoice { tool: Tool },
 }
 
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
+pub struct ResponseFormat {
+    r#type: ResponseFormatType
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
+pub struct ResponseFormatType {
+    r#type: ResponseFormatValue
+}
+
+
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
+pub enum ResponseFormatValue {
+    Text,
+    JsonObject
+}
+
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct ChatCompletionRequest {
     pub model: String,
@@ -25,7 +42,7 @@ pub struct ChatCompletionRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub n: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub response_format: Option<Value>,
+    pub response_format: Option<ResponseFormat>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub stream: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -77,7 +94,7 @@ impl_builder_methods!(
     temperature: f64,
     top_p: f64,
     n: i64,
-    response_format: Value,
+    response_format: ResponseFormat,
     stream: bool,
     stop: Vec<String>,
     max_tokens: i64,
