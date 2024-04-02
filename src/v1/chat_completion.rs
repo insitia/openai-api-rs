@@ -10,6 +10,7 @@ use crate::v1::common;
 pub enum ToolChoiceType {
     None,
     Auto,
+    Any,
     ToolChoice { tool: Tool },
 }
 
